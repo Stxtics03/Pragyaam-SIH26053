@@ -6,7 +6,7 @@
 [![PS SIH26053](https://img.shields.io/badge/PS-SIH26053-blue)](https://www.sih.gov.in/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Demo Video](https://img.shields.io/badge/Demo-Watch%20Video-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=R3EE5J3rBpA)
-[![Deck PDF](https://img.shields.io/badge/Deck-Open%20PDF-B30B00?logo=adobeacrobatreader&logoColor=white)](assets/Pragyaam-SIH26053-deck.pdf)
+[![Deck PDF](https://img.shields.io/badge/Deck-Open%20PDF-B30B00?logo=adobeacrobatreader&logoColor=white)]([assets/Pragyaam-SIH26053-deck.pdf](https://canva.link/2p4quk2cxwr24ao))
 
 > **Pragyaam is a foveated 2.5D LiDAR mapping system that sets resolution by range, semantics and direction: fine where the sensor has data, coarse where it does not. It runs inside a memory bound fixed at startup and removes ghost trails of moving objects in real time.**
 
