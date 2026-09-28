@@ -64,7 +64,7 @@ Measured on SemanticKITTI.
 | Ghost cleanup | **0 of 4,071** frames missed (seq 08) |
 | Reproducibility | CPU and GPU maps **bit-identical**; same map hash on two different machines |
 
-GPU timings are from an RTX 5050 Laptop GPU; a Tesla T4 gives 21.94 / 28.40 ms on the 5/10/50 schedule.
+GPU timings are from an Low end spec GPU & CPU computation;And for pipeline tranin a Tesla T4 with RTX 5050 & 12 core CPU - gives 21.94 / 28.40 ms on the 5/10/50 schedule.
 
 ---
 
