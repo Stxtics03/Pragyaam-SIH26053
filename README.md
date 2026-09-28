@@ -1,4 +1,3 @@
-
 # Pragyaam — Foveated 2.5D LiDAR Mapping
 
 **Adaptive Variable-Resolution 2.5D LiDAR Mapping for Dynamic Environment Perception**
@@ -77,8 +76,8 @@ GPU timings are from an Low end spec GPU & CPU computation;And for pipeline tran
 
 ## Methodology
 
-<p align="center">
-  <a href="assets/pragyaam-methodology.png">flowchart LR
+```mermaid
+flowchart LR
   %% Pragyaam — Adaptive 2.5D LiDAR Mapping Architecture
   subgraph IN["01 · INPUT LAYER"]
     direction TB
@@ -204,9 +203,7 @@ GPU timings are from an Low end spec GPU & CPU computation;And for pipeline tran
   class ADAPTIVEMAP,QUERY,WORLD,TRAV,DYNQ,REGION output;
   class DASH,NAV,PATH,PERF application;
   class RMSE,IOU,MEMORY,LAT,REGRET metric;
-</a>
-  <br><sub>Click to open full size.</sub>
-</p>
+```
 
 ---
 
