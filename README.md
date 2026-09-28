@@ -1,3 +1,4 @@
+<img width="8192" height="1535" alt="AES-256 Encryption Workflow-2026-09-28-071505" src="https://github.com/user-attachments/assets/8dd70748-8130-4097-8c6e-4c51c89680cd" />
 # Pragyaam — Foveated 2.5D LiDAR Mapping
 
 **Adaptive Variable-Resolution 2.5D LiDAR Mapping for Dynamic Environment Perception**
@@ -13,7 +14,8 @@
 **Smart India Hackathon 2026 · SIH26053 · DRDO · Smart Vehicles · Team Chronicles.exe (178295)**
 
 <p align="center">
-  <a href="assets/pragyaam-dashboard.png"><img src="assets/pragyaam-dashboard.png" alt="Pragyaam dashboard: Unreal driving view, live Rerun 2.5D map, memory and GPU panels" width="100%"></a>
+  <a href="assets/pragyaam-dashboard.png"><img width="1395" height="631" alt="pragyaam-dashboard" src="https://github.com/user-attachments/assets/6ed4fb6e-985d-4260-9fab-391e6e60f343" />
+<img src="assets/pragyaam-dashboard.png" alt="Pragyaam dashboard: Unreal driving view, live Rerun 2.5D map, memory and GPU panels" width="100%"></a>
   <br><sub>One run, two windows: the Unreal driving view (left) and the live Rerun dashboard (right), SemanticKITTI frame 24.</sub>
 </p>
 
@@ -69,13 +71,15 @@ GPU timings are from an RTX 5050 Laptop GPU; a Tesla T4 gives 21.94 / 28.40 ms o
 ## Architecture
 
 <p align="center">
-  <a href="assets/pragyaam-architecture.png"><img src="assets/pragyaam-architecture.png" alt="Pragyaam architecture: input, processing, mapping, output" width="100%"></a>
+  <a href="assets/pragyaam-architecture.png"><img width="4285" height="508" alt="pragyaam-architecture" src="https://github.com/user-attachments/assets/b39b1fce-fede-435b-bc9c-b495e46891e2" />
+<img src="assets/pragyaam-architecture.png" alt="Pragyaam architecture: input, processing, mapping, output" width="100%"></a>
 </p>
 
 ## Methodology
 
 <p align="center">
-  <a href="assets/pragyaam-methodology.png"><img src="assets/pragyaam-methodology.png" alt="Pragyaam methodology: input, perception, adaptive resolution, mapping core, dynamic objects, outputs, evaluation" width="100%"></a>
+  <a href="assets/pragyaam-methodology.png"><img width="8000" height="1499" alt="pragyaam-methodology" src="https://github.com/user-attachments/assets/3a4776f6-7568-404a-beb0-be56b43b7a40" />
+<img src="assets/pragyaam-methodology.png" alt="Pragyaam methodology: input, perception, adaptive resolution, mapping core, dynamic objects, outputs, evaluation" width="100%"></a>
   <br><sub>Click to open full size.</sub>
 </p>
 
@@ -125,15 +129,6 @@ scripts/      every script behind a reported number, plus demo.sh
 tests/        667 tests, including determinism and partition gates
 docs/         architecture, maths, evaluation, limitations, research log
 ```
-
-## Honest limitations
-
-- **Planner regret:** Pragyaam beats a uniform 10 cm grid on 5 of 11 sequences at ~37% of its memory. Not yet a universal win.
-- **Motion flags** come from dataset labels today; our learned motion segmentation is at ~20% IoU.
-- **Beyond 50 m**, classification can't be scored: SemanticKITTI stops labelling there.
-- **Jetson:** designed for it, not yet measured on one.
-
-Full list: [`docs/known-limitations.md`](docs/known-limitations.md).
 
 ## Documentation
 
