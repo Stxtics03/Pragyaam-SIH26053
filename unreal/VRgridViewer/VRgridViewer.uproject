@@ -1,0 +1,38 @@
+{
+    "FileVersion": 3,
+    "EngineAssociation": "5.8",
+    "Category": "",
+    "Description": "VRgrid map viewer -- plays a baked .vrgf scene beside the Rerun window (SIH26053).",
+    "Modules": [
+        {
+            "Name": "VRgridViewer",
+            "Type": "Runtime",
+            "LoadingPhase": "Default",
+            "AdditionalDependencies": [
+                "Engine"
+            ]
+        }
+    ],
+    "Plugins": [
+        {
+            "Name": "PythonScriptPlugin",
+            "Enabled": true
+        },
+        {
+            "Name": "ChaosVehiclesPlugin",
+            "Enabled": true
+        },
+        {
+            "Name": "ChaosModularVehicle",
+            "Enabled": true
+        },
+        {
+            "Name": "ChaosModularVehicleExamples",
+            "Enabled": true
+        },
+        {
+            "Name": "ProceduralMeshComponent",
+            "Enabled": true
+        }
+    ]
+}
