@@ -78,7 +78,132 @@ GPU timings are from an Low end spec GPU & CPU computation;And for pipeline tran
 ## Methodology
 
 <p align="center">
-  <a href="assets/pragyaam-methodology.png"><img width="8000" height="1499" alt="pragyaam-methodology" src="https://github.com/user-attachments/assets/3a4776f6-7568-404a-beb0-be56b43b7a40" />
+  <a href="assets/pragyaam-methodology.png">flowchart LR
+  %% Pragyaam — Adaptive 2.5D LiDAR Mapping Architecture
+  subgraph IN["01 · INPUT LAYER"]
+    direction TB
+    LIDAR["LiDAR<br/>Point Cloud"]
+    DATA["SemanticKITTI<br/>Labels / Dataset"]
+    POSE["Vehicle Pose<br/>& Motion"]
+  end
+
+  subgraph PER["02 · PREPROCESSING & PERCEPTION"]
+    direction TB
+    TF["Coordinate / Frame<br/>Transformation"]
+    RANGEIMG["Range Image<br/>Projection"]
+    DESKEW["Motion Compensation<br/>/ Deskewing"]
+    GROUND["Ground Segmentation<br/>Patchwork++"]
+    SEM["Semantic<br/>Classification"]
+    DETECT["Dynamic Object<br/>Detection"]
+  end
+
+  subgraph RES["03 · ADAPTIVE RESOLUTION DECISION"]
+    direction TB
+    DIST["Range / Distance<br/>from Sensor"]
+    IMPORTANCE["Semantic<br/>Importance"]
+    STATE["Vehicle Direction<br/>& Speed"]
+    CTRL{{"Adaptive Resolution<br/>Controller"}}
+    POLICY["5 cm · High importance<br/>10 cm · Medium-high<br/>20 cm · Normal<br/>40 cm · Low importance"]
+  end
+
+  subgraph CORE["04 · PRAGYAAM MAPPING CORE"]
+    direction TB
+    GRID[["Adaptive / Foveated<br/>2.5D Grid"]]
+    HEIGHT["Height & Variance<br/>Estimation"]
+    OCC["Occupancy Fusion"]
+    SFUSE["Semantic Fusion"]
+    KF["Uncertainty-Aware<br/>Kalman Fusion"]
+    SPLIT["Adaptive Grid<br/>Split & Merge"]
+    MEM["Fixed Memory<br/>Allocation"]
+  end
+
+  subgraph DYN["05 · DYNAMIC OBJECT HANDLING"]
+    direction TB
+    DYNID["Dynamic Object<br/>Identification"]
+    TRANSIENT["Transient<br/>Object Layer"]
+    VIS["Range-Image<br/>Visibility Check"]
+    DECAY["Temporal Decay"]
+    GHOST["Ghost Artifact<br/>Removal"]
+  end
+
+  subgraph MAP["06 · MAP OUTPUT / QUERY INTERFACE"]
+    direction TB
+    ADAPTIVEMAP[("Published Adaptive<br/>2.5D Map")]
+    QUERY["Planner Query<br/>Interface"]
+    WORLD["World-Coordinate<br/>Queries"]
+    TRAV["Traversability<br/>Queries"]
+    DYNQ["Dynamic-Object<br/>Queries"]
+    REGION{"Conservative Region<br/>SAFE / BLOCKED / MIXED"}
+  end
+
+  subgraph APP["07 · APPLICATION & OUTPUT LAYER"]
+    direction TB
+    DASH["Rerun / Visualization<br/>Dashboard"]
+    NAV["Autonomous Navigation<br/>/ Planner"]
+    PATH["Path Planning &<br/>Traversability"]
+    PERF["Performance<br/>Evaluation"]
+  end
+
+  subgraph EVAL["08 · EVALUATION"]
+    direction TB
+    RMSE["Mapping RMSE"]
+    IOU["IoU"]
+    MEMORY["Memory Usage"]
+    LAT["Latency"]
+    REGRET["Planner Regret"]
+  end
+
+  LIDAR --> TF --> RANGEIMG --> DESKEW --> GROUND --> SEM --> DETECT
+  POSE --> TF
+  POSE --> DESKEW
+  DATA -. labels .-> SEM
+
+  RANGEIMG --> DIST
+  SEM --> IMPORTANCE
+  POSE --> STATE
+  DIST & IMPORTANCE & STATE --> CTRL --> POLICY
+
+  POLICY ==> GRID
+  GROUND --> HEIGHT
+  GROUND --> OCC
+  SEM --> SFUSE
+  GRID --> HEIGHT --> OCC --> SFUSE --> KF --> SPLIT --> MEM --> ADAPTIVEMAP
+
+  DETECT --> DYNID --> TRANSIENT --> VIS --> DECAY --> GHOST
+  GHOST --> KF
+  GHOST --> ADAPTIVEMAP
+
+  ADAPTIVEMAP --> QUERY
+  QUERY --> WORLD & TRAV & DYNQ & REGION
+  QUERY --> DASH & NAV & PATH & PERF
+
+  KF -. evaluation .-> RMSE
+  KF -.-> IOU
+  MEM -.-> MEMORY
+  QUERY -.-> LAT
+  NAV -.-> REGRET
+
+  classDef input fill:#ecfeff,stroke:#22d3ee,stroke-width:1.5px,color:#164e63;
+  classDef perception fill:#f0fdfa,stroke:#2dd4bf,stroke-width:1.5px,color:#134e4a;
+  classDef decision fill:#fdf4ff,stroke:#e879f9,stroke-width:3px,color:#701a75;
+  classDef policy fill:#fff7ed,stroke:#fb923c,stroke-width:1.5px,color:#7c2d12;
+  classDef core fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px,color:#4c1d95;
+  classDef innovation fill:#eef2ff,stroke:#818cf8,stroke-width:4px,color:#312e81;
+  classDef dynamic fill:#fff1f2,stroke:#fb7185,stroke-width:1.5px,color:#881337;
+  classDef output fill:#f0fdf4,stroke:#4ade80,stroke-width:1.5px,color:#14532d;
+  classDef application fill:#f0f9ff,stroke:#38bdf8,stroke-width:1.5px,color:#0c4a6e;
+  classDef metric fill:#fefce8,stroke:#facc15,stroke-width:1.5px,color:#713f12;
+
+  class LIDAR,DATA,POSE input;
+  class TF,RANGEIMG,DESKEW,GROUND,SEM,DETECT perception;
+  class DIST,IMPORTANCE,STATE,CTRL decision;
+  class POLICY policy;
+  class HEIGHT,OCC,SFUSE,KF,SPLIT,MEM core;
+  class GRID innovation;
+  class DYNID,TRANSIENT,VIS,DECAY,GHOST dynamic;
+  class ADAPTIVEMAP,QUERY,WORLD,TRAV,DYNQ,REGION output;
+  class DASH,NAV,PATH,PERF application;
+  class RMSE,IOU,MEMORY,LAT,REGRET metric;
 </a>
   <br><sub>Click to open full size.</sub>
 </p>
